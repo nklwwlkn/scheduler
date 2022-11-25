@@ -14,7 +14,7 @@
 3. Build the service `npm run build`
 4. Run the PostgreSQL & Redis using `docker-compose up`
 5. Run the migrations `npx prisma migrate dev`
-6. Generate new Prisma client `npx prusma generate`
+6. Generate new Prisma client `npx prisma generate`
 7. Run the service `npm run start`
 
 ## Usage:
