@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String  @id @default(uuid())
+  name          String?
+  email         String  @unique
+  tasksAssigned Task[]
+}
+
+model Task {
+  id                String                 @id @default(uuid())
+  name              String
+  category          CategoryEnum?
+  assignedTo        User?                  @relation(fields: [userId], references: [id])
+  userId            String?
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime?              @updatedAt
+  recurringInterval RecurringIntervalEnum?
+  recurringJobId    String?
+
+  @@index([id])
+}
+
+enum RecurringIntervalEnum {
+  every_minute
+  every_day
+  every_week
+  every_two_weeks
+}
+
+enum CategoryEnum {
+  environment
+  social
+  goverance
+}

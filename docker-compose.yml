@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  main_postgresql:
+    container_name: main_db
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: test_db
+    ports:
+      - 5432:5432
+
+  redis:
+    container_name: redis
+    image: bitnami/redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
