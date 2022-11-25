@@ -9,8 +9,7 @@
 
 ## Development:
 
-0. Set required envs.
-1. Clone the repo.
+1. Clone the repo & set required envs.
 2. Run `npm install`
 3. Build the service `npm run build`
 4. Run the PostgreSQL & Redis using `docker-compose up`
