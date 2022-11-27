@@ -5,7 +5,7 @@ export const createUserValidator = [
   body('email')
     .trim()
     .notEmpty()
-    .withMessage('User email must be supplied.')
+    .withMessage('email must be supplied.')
     .isEmail()
-    .withMessage('User email must have a correct email format.'),
+    .withMessage('email must have a correct email format.'),
 ]

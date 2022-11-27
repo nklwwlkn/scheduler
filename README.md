@@ -1,4 +1,4 @@
-# cycles-srv
+# scheduler-srv
 
 ## Required envs:
 

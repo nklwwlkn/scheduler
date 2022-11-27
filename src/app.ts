@@ -3,6 +3,7 @@ import express from 'express'
 import { json } from 'body-parser'
 import cors from 'cors'
 import morgan from 'morgan'
+import compression from 'compression'
 
 import { NotFoundError } from '@errors/NotFoundError'
 
@@ -14,6 +15,7 @@ import { tasksRouter } from '@api/v1/routers/tasksRouter'
 
 const app = express()
 
+app.use(compression())
 app.use(cors())
 app.use(json())
 

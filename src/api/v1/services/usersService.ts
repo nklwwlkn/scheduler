@@ -1,6 +1,6 @@
 import { PrismaClient, User } from '@prisma/client'
 
-import { PrismaError } from '@errors/PrismaError'
+import { PrismaError } from '@errors/.'
 
 const prisma = new PrismaClient()
 
@@ -20,7 +20,9 @@ export async function create(payload: User) {
     console.log(`New user with id ${newUser.id} created.`)
 
     return newUser
-  } catch (error) {
-    throw new PrismaError(error)
+  } catch (err) {
+    console.error(err)
+
+    throw new PrismaError(err)
   }
 }

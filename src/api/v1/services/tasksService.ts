@@ -3,8 +3,7 @@ import { PrismaClient, Task } from '@prisma/client'
 import * as Scheduler from '@services/schedulerService'
 import { connect } from '@utils/prisma/connect'
 
-import { PrismaError } from '@errors/PrismaError'
-import { BadRequestError } from '@errors/BadRequestError'
+import { PrismaError, BadRequestError } from '@errors/.'
 
 const prisma = new PrismaClient()
 
@@ -14,6 +13,7 @@ const INCLUDE_DEFAULT = {
 
 export async function create(payload: Task) {
   let newTask: Task
+
   const { name, category, userId, startDate, endDate, recurringInterval } =
     payload
 
@@ -33,10 +33,10 @@ export async function create(payload: Task) {
     })
 
     console.log(`New task with id ${newTask.id} created.`)
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
 
-    throw new PrismaError(error)
+    throw new PrismaError(err)
   }
 
   try {
@@ -54,8 +54,8 @@ export async function create(payload: Task) {
       })
     }
     return newTask
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
 
     throw new BadRequestError('Oops. Unexpected error.')
   }

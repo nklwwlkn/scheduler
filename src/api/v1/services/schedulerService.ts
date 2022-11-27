@@ -1,4 +1,4 @@
-import { Task } from '@prisma/client'
+import { Task, RecurringIntervalEnum } from '@prisma/client'
 
 import { notificationQueue } from '@utils/queues/notificationQueue'
 
@@ -7,14 +7,7 @@ const ONE_DAY_IN_MS = ONE_MINUTE_IN_MS * 1440
 const ONE_WEEK_IN_MS = ONE_DAY_IN_MS * 7
 const TWO_WEEKS_IN_MS = ONE_WEEK_IN_MS * 2
 
-enum RecurringIntervalEnum {
-  every_minute = 'every_minute',
-  every_day = 'every_day',
-  every_week = 'every_week',
-  every_two_weeks = 'every_two_weeks',
-}
-
-function parseRecurringInterval(recurringInterval: string): number | undefined {
+function parseRecurringInterval(recurringInterval: string) {
   switch (recurringInterval) {
     case RecurringIntervalEnum['every_minute']:
       return ONE_MINUTE_IN_MS
@@ -34,7 +27,7 @@ export async function addNotificationTask(task: Task) {
 
   if (everyMs) {
     console.log(
-      `Add a new notification task with id ${task.id} to queue, recurring interval is ${task.recurringInterval}`,
+      `Adding a new notification task with id ${task.id} to queue, recurring interval is ${task.recurringInterval}`,
     )
     const job = await notificationQueue.add(task, {
       repeat: {
